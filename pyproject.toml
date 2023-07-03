@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "healthzed"
+version = "0.1.0"
+description = ""
+authors = ["chrisezhu <thereisnoaddress@gmail.com>"]
+readme = "README.md"
+packages = [{include = "healthzed_poetry"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+black = "^23.3.0"
+fastapi = "^0.99.1"
+uvicorn = "^0.22.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

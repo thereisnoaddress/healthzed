@@ -10,3 +10,7 @@ To create a project that works similar to the [Kubernetes /healthz endpoint](htt
 
 Rohan <3 
 
+### Running locally: 
+
+1. `poetry install`
+2. `uvicorn endpoint:app --reload`
