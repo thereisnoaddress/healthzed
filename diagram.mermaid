@@ -1,0 +1,29 @@
+graph
+
+subgraph Users
+    A(User A)
+    B(User B)
+end
+
+subgraph Backend/API
+    E(FastAPI App)
+    F[Database]
+    G[Message Queue]
+end
+
+subgraph User Interface
+    H(Web Interface)
+end
+
+A --> H
+B -- Acknowledge Ping --> E
+
+E -- Save Ping --> F
+E -- Store Ping --> G
+G -- Send Notification --> B
+
+H -- Ping --> E
+H -- View Pings --> E
+
+
+
