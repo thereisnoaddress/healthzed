@@ -17,4 +17,3 @@ def send_ping(PingRequest):
         message="Ping enqueued successfully!"
     )
 
-
