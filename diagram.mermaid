@@ -12,18 +12,18 @@ subgraph Backend/API
 end
 
 subgraph User Interface
-    H(Web Interface)
+    I(API endpoints)
 end
 
-A --> H
+A --> I
 B -- Acknowledge Ping --> E
 
 E -- Save Ping --> F
 E -- Store Ping --> G
 G -- Send Notification --> B
 
-H -- Ping --> E
-H -- View Pings --> E
+I -- Ping --> E
+I -- View Pings --> E
 
 
 

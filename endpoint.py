@@ -1,9 +1,20 @@
 from fastapi import FastAPI
-from main import print_hi
+from main import deliver_ping
+
+from protocol import PingRequest, PingResponse
 
 app = FastAPI()
 
+@app.post("/send_ping")
+def send_ping(PingRequest):
+    from_user = PingRequest.from_user
+    to_user = PingRequest.to_user
 
-@app.get("/")
-async def hello_world(name):
-    return print_hi(name)
+    deliver_ping.delay(from_user, to_user)
+
+    return PingResponse(
+        status_code=200,
+        message="Ping enqueued successfully!"
+    )
+
+
