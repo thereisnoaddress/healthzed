@@ -13,4 +13,5 @@ Rohan <3
 ### Running locally: 
 
 1. `poetry install`
+2. `pre-commit install`
 2. `uvicorn endpoint:app --reload`
