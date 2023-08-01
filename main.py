@@ -1,12 +1,9 @@
 import logging
+import logging.config
+logging.config.fileConfig('logging.conf')
 
-logger = logging.getLogger()
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    return f"Hi, {name}"
-
+# create logger
+logger = logging.getLogger(__name__)
 
 def deliver_ping(from_user, to_user):
     # TODO: add some sort of message delivery service? like AWS SNS
