@@ -1,11 +1,17 @@
-import logging
 import logging.config
-logging.config.fileConfig('logging.conf')
+
+logging.config.fileConfig("logging.conf")
 
 # create logger
 logger = logging.getLogger(__name__)
 
-def deliver_ping(from_user, to_user):
-    # TODO: add some sort of message delivery service? like AWS SNS
-    logger.info(f"delivering ping from {from_user} to {to_user}")
+from notification_service import NotificationService
+from protocol import HealthzedUser
+
+notification_service = NotificationService()
+
+
+def deliver_ping(from_user: HealthzedUser, to_user: HealthzedUser, message: str):
+    notification_service.send_sns_notification(message=message)
+    logger.info(f"delivering ping from {from_user.id} to {to_user.id}")
     return True

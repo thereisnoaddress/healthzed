@@ -14,8 +14,9 @@ def check_health():
 
 @app.post("/send_ping")
 def send_ping(data: PingRequest):
-    # TODO: add celery queue config
-    response = deliver_ping(from_user=data.from_user, to_user=data.to_user)
+    response = deliver_ping(
+        from_user=data.from_user, to_user=data.to_user, message=data.message
+    )
     if response:
         return PingResponse(status_code=200, message="Ping sent successfully!")
 
