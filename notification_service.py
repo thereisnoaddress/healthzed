@@ -22,7 +22,7 @@ class NotificationService:
             aws_secret_access_key=os.environ["SECRET_KEY"],
             region_name="us-east-2",
         )
-        self.sns_topic = self.sns_resource.create_topic(Name="healthz_test_topic")
+        self.sns_topic = self.sns_resource.create_topic(Name="healthzed-test-topic")
 
     def send_sns_notification(self, message="Test SNS message!"):
         try:
