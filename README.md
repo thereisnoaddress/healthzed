@@ -14,4 +14,5 @@ Rohan <3
 
 1. `poetry install`
 2. `pre-commit install`
-2. `uvicorn endpoint:app --reload`
+3. Make sure you have AWS credentials in your .env file. 
+4. `uvicorn endpoint:app --reload`
