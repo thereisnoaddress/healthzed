@@ -12,6 +12,7 @@ class HealthzedUser:
 class PingRequest:
     from_user: HealthzedUser
     to_user: HealthzedUser
+    message: str
 
 
 @dataclass
