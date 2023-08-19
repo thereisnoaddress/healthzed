@@ -13,6 +13,7 @@ class PingRequest:
     from_user: HealthzedUser
     to_user: HealthzedUser
     message: str
+    phone_number: str
 
 
 @dataclass

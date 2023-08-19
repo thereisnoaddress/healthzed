@@ -15,7 +15,10 @@ def check_health():
 @app.post("/send_ping")
 def send_ping(data: PingRequest):
     response = deliver_ping(
-        from_user=data.from_user, to_user=data.to_user, message=data.message
+        from_user=data.from_user,
+        to_user=data.to_user,
+        message=data.message,
+        phone_number=data.phone_number,
     )
     if response:
         return PingResponse(status_code=200, message="Ping sent successfully!")
