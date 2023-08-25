@@ -1,0 +1,20 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: healthzed
+    src: ./
+    engine: python3.9
+    primary: true
+    presets:
+      env:
+        - name: AWS_ACCESS_KEY
+          description: AWS access key dummy
+          default: "dummy-key"
+        - name: AWS_SECRET_KEY
+          description: AWS secret key dummy
+          default: "dummy-key-secret"
+        - name: AWS_REGION
+          description: AWS region
+          default: "us-east-2"
+
+
