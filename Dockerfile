@@ -14,6 +14,7 @@ ENV YOUR_ENV=${YOUR_ENV} \
   POETRY_VERSION=1.5.1
 
 # System deps:
+COPY .env.test /etc/secrets/.env
 RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env pip install "poetry==$POETRY_VERSION"
 
 # Copy only requirements to cache them in docker layer
