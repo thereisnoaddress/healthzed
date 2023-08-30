@@ -23,4 +23,4 @@ Rohan <3
 Note: you can use any name for `YOUR_ENV` and the image tag (specified with `-t`).
 2. Run the docker container: 
 ` docker run -p 8000:8000 healthzed:latest`
-Note: you can use any port as long as you expose it in the `Dockerfile` and here after `-p`.  a
+Note: you can use any port as long as you expose it in the `Dockerfile` and here after `-p`.
