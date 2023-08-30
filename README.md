@@ -19,8 +19,8 @@ Rohan <3
 
 ### Running Docker image 
 1. Build docker image: 
-` docker build --build-arg YOUR_ENV=production -t healthz:250823 .`
-Note: you can use any name for `YOUR_ENV` and the image tag.
+` docker build --build-arg YOUR_ENV=production -t healthzed:latest .`
+Note: you can use any name for `YOUR_ENV` and the image tag (specified with `-t`).
 2. Run the docker container: 
-` docker run -p 8000:8000 my-fastapi-app:latest`
-Note: you can use any port as long as you define it in the `Dockerfile` and here after `-p`. 
+` docker run -p 8000:8000 healthzed:latest`
+Note: you can use any port as long as you expose it in the `Dockerfile` and here after `-p`. 
