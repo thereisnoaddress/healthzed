@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from main import deliver_ping
+from healthzed.main import deliver_ping
 import uvicorn
 
-from protocol import PingRequest, PingResponse
+from healthzed.protocol import PingRequest, PingResponse
 
 app = FastAPI()
 

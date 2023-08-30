@@ -29,4 +29,4 @@ RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env poetry config virtualenvs.
 COPY . /code
 
 EXPOSE 8000
-CMD ["uvicorn", "--reload", "endpoint:app", "--host", "0.0.0.0"]
+CMD ["uvicorn", "--reload", "healthzed.endpoint:app", "--host", "0.0.0.0", "--port", "8000"]
