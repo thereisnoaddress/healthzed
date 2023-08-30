@@ -5,8 +5,8 @@ logging.config.fileConfig("logging.conf")
 # create logger
 logger = logging.getLogger(__name__)
 
-from notification_service import NotificationService
-from protocol import HealthzedUser
+from healthzed.notification_service import NotificationService
+from healthzed.protocol import HealthzedUser
 
 notification_service = NotificationService()
 

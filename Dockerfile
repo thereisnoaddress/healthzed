@@ -26,4 +26,4 @@ RUN poetry config virtualenvs.create false \
 COPY . /code
 
 EXPOSE 8000
-CMD ["uvicorn", "--reload", "endpoint:app", "--host", "0.0.0.0"]
+CMD ["uvicorn", "--reload", "endpoint:app", "--host", "0.0.0.0", "--port", "80"]

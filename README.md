@@ -15,7 +15,7 @@ Rohan <3
 1. `poetry install`
 2. `pre-commit install`
 3. Make sure you have AWS credentials in your .env file. Ask Chris to add your phone number to the list of AWS verified numbers and confirm an OTP. 
-4. `uvicorn endpoint:app --reload`
+4. `uvicorn healthzed.endpoint:app --reload`
 
 ### Running Docker image 
 1. Build docker image: 
