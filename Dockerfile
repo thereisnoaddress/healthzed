@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1.2
+
 FROM python:3.9
 
 ARG YOUR_ENV
@@ -12,14 +14,15 @@ ENV YOUR_ENV=${YOUR_ENV} \
   POETRY_VERSION=1.5.1
 
 # System deps:
-RUN pip install "poetry==$POETRY_VERSION"
+COPY .env.test /etc/secrets/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env pip install "poetry==$POETRY_VERSION"
 
 # Copy only requirements to cache them in docker layer
 WORKDIR /code
 COPY poetry.lock pyproject.toml /code/
 
 # Project initialization:
-RUN poetry config virtualenvs.create false \
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
 # Creating folders, and files for a project:
