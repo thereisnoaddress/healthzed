@@ -12,9 +12,6 @@ notification_service = NotificationService()
 
 async def deliver_ping(message: str, phone_number: str):
     logger.info(f"asynchronously delivering ping to phone number {phone_number}...")
-    # notification_service.send_sns_notification(
-    #     phone_number=phone_number, message=message
-    # )
     notification_service.send_pinpoint_sms_notification(
         destination_number=phone_number,
         message=message,
