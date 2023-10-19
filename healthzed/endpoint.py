@@ -4,6 +4,14 @@ import uvicorn
 
 from healthzed.protocol import PingRequest, PingResponse
 
+import asyncio
+import logging.config
+
+logging.config.fileConfig("logging.conf")
+
+# create logger
+logger = logging.getLogger(__name__)
+
 app = FastAPI()
 
 
@@ -13,15 +21,14 @@ def check_health():
 
 
 @app.post("/send_ping")
-def send_ping(data: PingRequest):
-    response = deliver_ping(
-        from_user=data.from_user,
-        to_user=data.to_user,
-        message=data.message,
-        phone_number=data.phone_number,
+async def send_ping(data: PingRequest):
+    send_task = asyncio.create_task(
+        deliver_ping(message=data.message, phone_number=data.phone_number)
     )
-    if response:
-        return PingResponse(status_code=200, message="Ping sent successfully!")
+
+    await send_task
+
+    return PingResponse(status_code=200, message="Ping sent successfully!")
 
 
 if __name__ == "__main__":
