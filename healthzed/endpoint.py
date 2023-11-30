@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from healthzed.main import deliver_ping
 import uvicorn
 
@@ -29,6 +29,13 @@ async def send_ping(data: PingRequest):
     await send_task
 
     return PingResponse(status_code=200, message="Ping sent successfully!")
+
+
+@app.post("/sns_endpoint")
+async def sns_endpoint(request: Request):
+    message = await request.json()
+    print("Received message:", message)
+    return {"status": "Message received"}
 
 
 if __name__ == "__main__":
