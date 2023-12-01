@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from healthzed.main import deliver_ping
 import uvicorn
 import aiohttp
+import json
 
 from healthzed.protocol import PingRequest, PingResponse
 
@@ -43,8 +44,17 @@ async def sns_endpoint(request: Request):
                 print(await resp.text())
     else:
         message = message["Message"]
-        logger.info("Received message:" + message)
-    return {"status": "Message received", "message": message}
+        # Parse the inner JSON string
+        inner_message = json.loads(message)
+        # Extract the desired fields
+        originationNumber = inner_message["originationNumber"]
+        messageBody = inner_message["messageBody"]
+        logger.info(f"Received message from {originationNumber}: {messageBody}")
+    return {
+        "status": "Message received",
+        "originationNumber": originationNumber,
+        "messageBody": messageBody,
+    }
 
 
 if __name__ == "__main__":
