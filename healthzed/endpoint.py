@@ -34,7 +34,8 @@ async def send_ping(data: PingRequest):
 @app.post("/sns_endpoint")
 async def sns_endpoint(request: Request):
     message = await request.json()
-    print("Received message:", message)
+    message = message["Message"]
+    logger.info("Received message:" + message)
     return {"status": "Message received"}
 
 
