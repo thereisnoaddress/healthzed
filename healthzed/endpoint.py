@@ -46,15 +46,18 @@ async def sns_endpoint(request: Request):
         message = message["Message"]
         # Parse the inner JSON string
         inner_message = json.loads(message)
+        # Parse the SNS Message field
+        sns_message = json.loads(inner_message["Records"][0]["Sns"]["Message"])
         # Extract the desired fields
-        originationNumber = inner_message["originationNumber"]
-        messageBody = inner_message["messageBody"]
+        originationNumber = sns_message["originationNumber"]
+        messageBody = sns_message["messageBody"]
         logger.info(f"Received message from {originationNumber}: {messageBody}")
-    return {
-        "status": "Message received",
-        "originationNumber": originationNumber,
-        "messageBody": messageBody,
-    }
+
+        return {
+            "status": "Message received",
+            "originationNumber": originationNumber,
+            "messageBody": messageBody,
+        }
 
 
 if __name__ == "__main__":
