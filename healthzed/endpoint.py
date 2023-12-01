@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from healthzed.main import deliver_ping
 import uvicorn
+import aiohttp
 
 from healthzed.protocol import PingRequest, PingResponse
 
@@ -34,8 +35,15 @@ async def send_ping(data: PingRequest):
 @app.post("/sns_endpoint")
 async def sns_endpoint(request: Request):
     message = await request.json()
-    message = message["Message"]
-    logger.info("Received message:" + message)
+    if message["Type"] == "SubscriptionConfirmation":
+        # handle subscription confirmation
+        confirmation_url = message["SubscribeURL"]
+        async with aiohttp.ClientSession() as session:
+            async with session.get(confirmation_url) as resp:
+                print(await resp.text())
+    else:
+        message = message["Message"]
+        logger.info("Received message:" + message)
     return {"status": "Message received", "message": message}
 
 
