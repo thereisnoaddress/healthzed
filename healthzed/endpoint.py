@@ -35,7 +35,7 @@ async def send_ping(data: PingRequest):
 @app.post("/sns_endpoint")
 async def sns_endpoint(request: Request):
     message = await request.json()
-    if message["Type"] == "SubscriptionConfirmation":
+    if "Type" in message and message["Type"] == "SubscriptionConfirmation":
         # handle subscription confirmation
         confirmation_url = message["SubscribeURL"]
         async with aiohttp.ClientSession() as session:
