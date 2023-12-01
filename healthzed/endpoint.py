@@ -36,7 +36,7 @@ async def sns_endpoint(request: Request):
     message = await request.json()
     message = message["Message"]
     logger.info("Received message:" + message)
-    return {"status": "Message received"}
+    return {"status": "Message received", "message": message}
 
 
 if __name__ == "__main__":
