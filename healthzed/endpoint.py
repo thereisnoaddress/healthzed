@@ -61,6 +61,7 @@ async def sns_endpoint(request: Request):
             originationNumber = sns_message["originationNumber"]
             messageBody = sns_message["messageBody"]
             logger.info(f"Received message from {originationNumber}: {messageBody}")
+            notification_service.numbers_that_replied.append(originationNumber)
             return {
                 "status": "Message received",
                 "originationNumber": originationNumber,
@@ -91,15 +92,12 @@ async def send_and_wait(data: PingRequest):
     while True:
         # Check if a message has been received from the phone number
         logger.info(f"Checking for received messages from {data.phone_number}")
-        received_message = notification_service.check_received_messages(
+        has_received_reply = notification_service.check_received_messages(
             data.phone_number
         )
-        logger.info(f"Received message: {received_message}")
-        if received_message is not None:
-            logger.info(
-                f"Received message from {data.phone_number}: {received_message}"
-            )
-            return {"status": "Message received", "message": received_message}
+        if has_received_reply:
+            logger.info(f"Received message from {data.phone_number}")
+            return {"status": "Message received", "number": data.phone_number}
 
         # Check if the timeout has been reached
         if time.time() - start_time > TIMEOUT:
