@@ -22,7 +22,7 @@ https://healthzed-on-render.onrender.com/docs
 
 It should be up and running but it won't send texts because you need to verify your phone number with AWS SNS. 
 
-Currently, only my phone number +16478611345 has been verified, so if you want to show me some love, you can spam me with some messages at that number and I can confirm that it's working :) 
+Currently, only my phone number +16136553097 has been verified, so if you want to show me some love, you can spam me with some messages at that number and I can confirm that it's working :) 
 
 ### Running locally
 
