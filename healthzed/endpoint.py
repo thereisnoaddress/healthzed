@@ -43,21 +43,26 @@ async def sns_endpoint(request: Request):
             async with session.get(confirmation_url) as resp:
                 print(await resp.text())
     else:
-        message = message["Message"]
-        # Parse the inner JSON string
-        inner_message = json.loads(message)
-        # Parse the SNS Message field
-        sns_message = json.loads(inner_message["Records"][0]["Sns"]["Message"])
-        # Extract the desired fields
-        originationNumber = sns_message["originationNumber"]
-        messageBody = sns_message["messageBody"]
-        logger.info(f"Received message from {originationNumber}: {messageBody}")
-
-        return {
-            "status": "Message received",
-            "originationNumber": originationNumber,
-            "messageBody": messageBody,
-        }
+        try:
+            # Try to parse the inner JSON string
+            inner_message = json.loads(message["Message"])
+            # Try to parse the SNS Message field
+            sns_message = json.loads(inner_message["Records"][0]["Sns"]["Message"])
+            # Extract the desired fields
+            originationNumber = sns_message["originationNumber"]
+            messageBody = sns_message["messageBody"]
+            logger.info(f"Received message from {originationNumber}: {messageBody}")
+            return {
+                "status": "Message received",
+                "originationNumber": originationNumber,
+                "messageBody": messageBody,
+            }
+        except json.JSONDecodeError:
+            return {"status": "Error", "message": "Invalid JSON format"}
+        except Exception as e:
+            logger.error(f"Error processing message: {e}")
+            logger.error(f"Received message: {message}")
+            return {"status": "Error processing message", "error": str(e)}
 
 
 if __name__ == "__main__":
