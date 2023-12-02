@@ -40,13 +40,6 @@ async def send_ping(data: PingRequest):
     return PingResponse(status_code=200, message="Ping sent successfully!")
 
 
-@app.post("/receive_ping")
-async def receive_ping(request: Request):
-    message = await request.json()
-    response = await notification_service.receive_ping(message)
-    return response
-
-
 @app.post("/sns_endpoint")
 async def sns_endpoint(request: Request):
     message = await request.json()
