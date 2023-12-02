@@ -47,7 +47,9 @@ async def sns_endpoint(request: Request):
             # Try to parse the inner JSON string
             inner_message = json.loads(message["Message"])
             # Try to parse the SNS Message field
-            sns_message = json.loads(inner_message["Records"][0]["Sns"]["Message"])
+            sns_message = json.loads(
+                inner_message["requestPayload"]["Records"][0]["Sns"]["Message"]
+            )
             # Extract the desired fields
             originationNumber = sns_message["originationNumber"]
             messageBody = sns_message["messageBody"]
