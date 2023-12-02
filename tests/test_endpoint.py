@@ -1,7 +1,5 @@
 from fastapi.testclient import TestClient
 from healthzed.endpoint import app
-import requests
-import json
 
 client = TestClient(app)
 

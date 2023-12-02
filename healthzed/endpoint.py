@@ -64,7 +64,9 @@ async def send_and_wait(data: PingRequest):
         logger.info(f"Checking for received messages from {data.phone_number}")
         received_reply = notification_service.check_received_messages(data.phone_number)
         if received_reply:
-            logger.info(f"Received message from {data.phone_number}: {received_reply}")
+            logger.info(
+                f"Received message from {data.phone_number}: {received_reply}. Stopping check..."
+            )
             return {
                 "status": "Message received",
                 "number": data.phone_number,
