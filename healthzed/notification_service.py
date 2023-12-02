@@ -24,7 +24,8 @@ class NotificationService:
             region_name=os.environ["AWS_PINPOINT_REGION"],
         )
 
-        self.numbers_that_replied = []
+        # dictionary of number to received message
+        self.numbers_that_replied = {}
 
     def send_pinpoint_sms_notification(
         self,
@@ -58,7 +59,8 @@ class NotificationService:
 
     def check_received_messages(self, phone_number):
         if phone_number in self.numbers_that_replied:
-            self.numbers_that_replied.remove(phone_number)
-            return True
+            message = self.numbers_that_replied[phone_number]
+            del self.numbers_that_replied[phone_number]
+            return message
         else:
             return False
