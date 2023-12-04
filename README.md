@@ -1,6 +1,17 @@
 ## Health-Zed
 ### The Canadian way of pronouncing `/healthz`
 
+tl;dr
+
+A service inspired by Kubernetes' /healthz endpoint, but for people! It sends a quick check-in to ensure someone's alive when life gets overwhelming. Easy, low-barrier, and aimed at reassuring others during those 'disappear' moments.
+
+![image](https://github.com/thereisnoaddress/healthzed/assets/5344037/1ffdc42a-d387-48c3-a03e-47aa6602f667)
+
+
+This very cool AI art is geneatted by Bing, powered by DALL-E 3. It sure is for for peeople!
+
+## Background
+
 ### Goal
 
 To create a service that sends a ping to someone to check in on them and make sure they are alive. 
@@ -15,6 +26,8 @@ Rohan <3
 
 I wanted to create a simple service that has a low barrier of entry to make this easy to do. See _Stretch Goal_ to see the final form of this project.
 
+
+## Service
 
 ### Live Demo (hosted on Render)
 
@@ -47,7 +60,7 @@ Note: you can use any port as long as you expose it in the `Dockerfile` and here
 
 ------
 
-### Stretch Goal 
+## Stretch Goals
 _Stretch goal_ and original vision: to create a companion hardware that will act as a receiver and acknowledge liveliness checks. 
 
 It would be a very simple design so that it won't be distracting (like phones!) and it will have a low barrier of entry and no learning curve. It should just receive pings and have a button to acknowledge them. 
