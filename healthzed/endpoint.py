@@ -1,15 +1,10 @@
-from healthzed.main import deliver_ping
 from healthzed.notification_service import NotificationService
 from healthzed.protocol import PingRequest, PingResponse
+from healthzed.constants import TEXT_RESPONSE_TIMEOUT, POLL_INTERVAL
 
 from fastapi import FastAPI, Request
 import uvicorn
 import time
-import aiohttp
-import json
-
-TIMEOUT = 60
-POLL_INTERVAL = 1
 
 
 import asyncio
@@ -32,7 +27,9 @@ def check_health():
 @app.post("/send_ping")
 async def send_ping(data: PingRequest):
     send_task = asyncio.create_task(
-        deliver_ping(message=data.message, phone_number=data.phone_number)
+        notification_service.send_pinpoint_sms_notification(
+            message=data.message, phone_number=data.phone_number
+        )
     )
 
     await send_task
@@ -52,7 +49,9 @@ async def send_and_wait(data: PingRequest):
     # Send the ping
     logger.info(f"Sending ping to {data.phone_number} with message {data.message}")
     send_task = asyncio.create_task(
-        deliver_ping(message=data.message, phone_number=data.phone_number)
+        notification_service.send_pinpoint_sms_notification(
+            message=data.message, phone_number=data.phone_number
+        )
     )
     await send_task
     logger.info("Ping sent")
@@ -74,7 +73,7 @@ async def send_and_wait(data: PingRequest):
             }
 
         # Check if the timeout has been reached
-        if time.time() - start_time > TIMEOUT:
+        if time.time() - start_time > TEXT_RESPONSE_TIMEOUT:
             logger.error("Timeout waiting for response")
             return {"status": "Error", "message": "Timeout waiting for response"}
 

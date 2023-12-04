@@ -27,10 +27,10 @@ class NotificationService:
         # dictionary of number to received message
         self.numbers_that_replied = {}
 
-    def send_pinpoint_sms_notification(
+    async def send_pinpoint_sms_notification(
         self,
-        destination_number,
         message,
+        phone_number,
         message_type="PROMOTIONAL",
         origination_number="+18078085477",
         app_id="8bd98417d59a452f96fcc2b60cbd13cf",
@@ -39,7 +39,7 @@ class NotificationService:
             response = self.pinpoint_client.send_messages(
                 ApplicationId=app_id,
                 MessageRequest={
-                    "Addresses": {destination_number: {"ChannelType": "SMS"}},
+                    "Addresses": {phone_number: {"ChannelType": "SMS"}},
                     "MessageConfiguration": {
                         "SMSMessage": {
                             "Body": message,
@@ -53,9 +53,7 @@ class NotificationService:
             logger.exception("Couldn't send message.")
             raise
         else:
-            return response["MessageResponse"]["Result"][destination_number][
-                "MessageId"
-            ]
+            return response["MessageResponse"]["Result"][phone_number]["MessageId"]
 
     def check_received_messages(self, phone_number):
         if phone_number in self.numbers_that_replied:
