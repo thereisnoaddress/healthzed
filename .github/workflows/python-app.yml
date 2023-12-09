@@ -29,12 +29,11 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
-    - name: 'Create env file'
-      run: |
-        echo "${{ secrets.env.test }}" > .env
     - name: Debug .env.test content
       run: |
-        cat .env.test
+        echo "${{vars.AWS_ACCESS_KEY }}" > .env
+        echo "${{vars.AWS_REGION }}" > .env
+        echo "${{vars.AWS_SECRET_KEY }}" > .env
     - name: Debug environment variables
       run: |
         echo "DEBUG: Displaying loaded environment variables"
