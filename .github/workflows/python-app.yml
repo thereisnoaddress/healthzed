@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+  name: Python ${{ matrix.python-version }} unit tests
 
     runs-on: ubuntu-latest
 
