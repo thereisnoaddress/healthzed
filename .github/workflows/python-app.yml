@@ -30,8 +30,8 @@ jobs:
       run: |
         poetry install
     - name: 'Create env file'
-        run: |
-          echo "${{ .env.test }}" > .env
+      run: |
+        echo "${{ .env.test }}" > .env
     - name: Debug .env.test content
       run: |
         cat .env.test
