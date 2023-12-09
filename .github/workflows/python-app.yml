@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+    name: Python unit tests
 
     runs-on: ubuntu-latest
 
