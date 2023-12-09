@@ -33,7 +33,7 @@ jobs:
       run: |
         echo "Loading .env.test"
         set -a
-        . ./.env.test
+        source .env.test 
         set +a
     - name: Debug environment variables
       run: |
@@ -45,4 +45,4 @@ jobs:
         poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        poetry run pytest --env-debug
+        poetry run pytest
