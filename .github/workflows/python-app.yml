@@ -31,7 +31,7 @@ jobs:
         poetry install
     - name: 'Create env file'
       run: |
-        echo "${{ .env.test }}" > .env
+        echo "${{ secrets.env.test }}" > .env
     - name: Debug .env.test content
       run: |
         cat .env.test
