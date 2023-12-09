@@ -7,4 +7,4 @@ client = TestClient(app)
 def test_check_health():
     response = client.get("/healthz")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    assert response.json() is True
