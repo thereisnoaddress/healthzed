@@ -24,7 +24,7 @@ class TestEndpoint(unittest.TestCase):
         # THEN
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json(), {"status_code": 404, "message": "Ping sent successfully!"}
+            response.json(), {"status_code": 200, "message": "Ping sent successfully!"}
         )
 
     @patch("healthzed.notification_service.NotificationService.process_sns_endpoint")
