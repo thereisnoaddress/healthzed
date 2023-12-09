@@ -35,6 +35,9 @@ jobs:
         set -a
         source .env.test 
         set +a
+    - name: Debug .env.test content
+      run: |
+        cat .env.test
     - name: Debug environment variables
       run: |
         echo "DEBUG: Displaying loaded environment variables"
