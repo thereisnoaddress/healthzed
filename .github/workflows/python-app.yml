@@ -29,12 +29,9 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
-    - name: Load .env.test
-      run: |
-        echo "Loading .env.test"
-        set -a
-        source .env.test 
-        set +a
+    - name: 'Create env file'
+        run: |
+          echo "${{ .env.test }}" > .env
     - name: Debug .env.test content
       run: |
         cat .env.test
