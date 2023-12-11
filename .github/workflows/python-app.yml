@@ -37,5 +37,8 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
           AWS_PINPOINT_REGION: ${{ secrets.AWS_PINPOINT_REGION }}
+          APP_ID: ${{ secrets.APP_ID }}
+          ORIGINATION_NUMBER: ${{ secrets.ORIGINATION_NUMBER }}
+          MESSAGE_TYPE: ${{ secrets.MESSAGE_TYPE }}
       run: |
         poetry run pytest
