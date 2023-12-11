@@ -31,9 +31,9 @@ class NotificationService:
         self,
         message,
         phone_number,
-        message_type="PROMOTIONAL",
-        origination_number="+18078085477",
-        app_id="8bd98417d59a452f96fcc2b60cbd13cf",
+        message_type=os.environ["MESSAGE_TYPE"],
+        origination_number=os.environ["ORIGINATION_NUMBER"],
+        app_id=os.environ["APP_ID"],
     ):
         try:
             response = self.pinpoint_client.send_messages(
